@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import type { UserGeneration, Profile } from "@/lib/database.types";
-import DashboardClient from "./dashboard-client";
+import DashboardClient from "@/app/dashboard/dashboard-client";
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -15,7 +15,7 @@ export default async function DashboardPage() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll() {},
+        setAll() { },
       },
     }
   );
