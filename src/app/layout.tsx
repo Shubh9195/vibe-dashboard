@@ -40,10 +40,10 @@ export default function RootLayout({
                 priority
               />
               <div className="flex flex-col">
-                <span className="font-heading font-black text-2xl md:text-3xl tracking-tighter text-slate-900 group-hover:text-blue-600 transition-colors">
+                <span className="font-heading font-black text-2xl md:text-3xl tracking-tighter text-slate-900 group-hover:text-blue-600 transition-colors leading-none">
                   Sarkari<span className="text-slate-400">Campus</span>
                 </span>
-                <span className="hidden sm:block text-[9px] md:text-[10px] font-black font-sans text-blue-600 uppercase tracking-wider mt-1">
+                <span className="text-[7px] md:text-[10px] font-black font-sans text-blue-600 uppercase tracking-wider mt-1.5 w-32 md:w-auto leading-tight md:leading-normal">
                   India's Only Govt University Recruitment Prep Portal
                 </span>
               </div>
