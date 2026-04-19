@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
 
-export default function QuizResult({ params, searchParams }: { params: { attemptId: string }, searchParams: { score?: string, total?: string } }) {
+export default async function QuizResult(props: { params: Promise<{ attemptId: string }>, searchParams: Promise<{ score?: string, total?: string }> }) {
+  const searchParams = await props.searchParams;
   const score = parseInt(searchParams.score || "0");
   const total = parseInt(searchParams.total || "4");
   const percent = Math.round((score / total) * 100);

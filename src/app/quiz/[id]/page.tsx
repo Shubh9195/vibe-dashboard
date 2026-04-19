@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { Clock, CheckCircle2 } from "lucide-react";
 
@@ -11,7 +11,8 @@ const mockQuestions = [
   { id: 4, text: "What is the repo rate?", options: ["Rate at which RBI borrows", "Rate at which RBI lends to banks", "Rate of inflation", "Market exchange rate"], correct: 1 }
 ];
 
-export default function QuizEngine({ params }: { params: { id: string } }) {
+export default function QuizEngine(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
   const router = useRouter();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);

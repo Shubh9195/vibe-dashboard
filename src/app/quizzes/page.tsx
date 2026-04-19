@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Clock, CheckCircle2, ChevronRight, FileQuestion } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
-export default async function QuizzesPage({ searchParams }: { searchParams: { filter?: string } }) {
+export default async function QuizzesPage(props: { searchParams: Promise<{ filter?: string }> }) {
+  const searchParams = await props.searchParams;
   const supabase = await createClient();
   const filter = searchParams.filter || "All";
   
