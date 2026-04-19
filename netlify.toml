@@ -1,5 +1,4 @@
 [build]
-  base = "sarkaricampus"
   command = "npm run build"
   publish = ".next"
 
