@@ -40,10 +40,10 @@ export default function RootLayout({
                 priority
               />
               <div className="flex flex-col">
-                <span className="font-heading font-black text-3xl tracking-tighter text-slate-900 group-hover:text-blue-600 transition-colors">
+                <span className="font-heading font-black text-2xl md:text-3xl tracking-tighter text-slate-900 group-hover:text-blue-600 transition-colors">
                   Sarkari<span className="text-slate-400">Campus</span>
                 </span>
-                <span className="text-[9px] md:text-[10px] font-black font-sans text-blue-600 uppercase tracking-wider mt-1">
+                <span className="hidden sm:block text-[9px] md:text-[10px] font-black font-sans text-blue-600 uppercase tracking-wider mt-1">
                   India's Only Govt University Recruitment Prep Portal
                 </span>
               </div>
@@ -56,11 +56,11 @@ export default function RootLayout({
               <Link href="/notes" className="hover:text-slate-900 transition-colors">Notes</Link>
               <Link href="/previous-papers" className="hover:text-blue-600 transition-colors text-gradient-blue">Prev. Papers</Link>
             </div>
-            <div className="flex gap-4">
-              <Link href="/login" className="px-5 py-2.5 text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link href="/login" className="hidden sm:block px-5 py-2.5 text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">
                 Sign In
               </Link>
-              <Link href="/signup" className="px-6 py-2.5 text-sm font-black bg-slate-900 text-white rounded-xl shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:bg-slate-800 hover:-translate-y-0.5 transition-all">
+              <Link href="/signup" className="px-4 sm:px-6 py-2 sm:py-2.5 text-sm font-black bg-slate-900 text-white rounded-xl shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:bg-slate-800 hover:-translate-y-0.5 transition-all">
                 Get Access
               </Link>
             </div>

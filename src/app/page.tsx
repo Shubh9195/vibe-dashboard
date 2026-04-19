@@ -48,7 +48,7 @@ export default function Home() {
                 <span className="text-xs font-bold text-slate-500">1.2k Attempted Today</span>
               </div>
               <h3 className="text-xl font-black text-slate-900 mb-2">IIT Delhi Admin Assistant - Mock Test 1</h3>
-              <div className="flex items-center gap-5 text-sm font-semibold text-slate-600 mb-5">
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-sm font-semibold text-slate-600 mb-5">
                 <span className="flex items-center gap-1.5"><BookOpen className="w-4 h-4 text-slate-400" /> 100 Qs</span>
                 <span className="flex items-center gap-1.5"><svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> 120 mins</span>
                 <span className="flex items-center gap-1.5"><Globe2 className="w-4 h-4 text-slate-400" /> English, Hindi</span>
