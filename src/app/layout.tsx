@@ -53,7 +53,7 @@ export default function RootLayout({
               <Link href="/#recruitments" className="hover:text-slate-900 transition-colors text-blue-600 flex items-center gap-1">Jobs<span className="flex h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse"></span></Link>
               <Link href="/quizzes" className="hover:text-slate-900 transition-colors">Mocks</Link>
               <Link href="/syllabus" className="hover:text-slate-900 transition-colors">Syllabus</Link>
-              <Link href="/notes" className="hover:text-slate-900 transition-colors">Notes</Link>
+              <Link href="/courses" className="hover:text-slate-900 transition-colors">Courses</Link>
               <Link href="/previous-papers" className="hover:text-blue-600 transition-colors text-gradient-blue">Prev. Papers</Link>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
