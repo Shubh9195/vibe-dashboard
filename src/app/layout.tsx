@@ -31,7 +31,9 @@ export default function RootLayout({
         {/* ELITE TALL TOPBAR */}
         <nav className="sticky top-0 z-50 glass-nav transition-all duration-300">
           <div className="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-4 group">
+            <div className="flex items-center gap-3">
+              <MobileNav />
+              <Link href="/" className="flex items-center gap-4 group">
               <Image
                 src="/logo.png"
                 alt="Sarkari Campus Icon"
@@ -49,6 +51,7 @@ export default function RootLayout({
                 </span>
               </div>
             </Link>
+            </div>
             <div className="hidden md:flex gap-8 font-bold text-sm text-slate-500">
               <Link href="/" className="hover:text-slate-900 transition-colors">Home</Link>
               <Link href="/#recruitments" className="hover:text-slate-900 transition-colors text-blue-600 flex items-center gap-1">Jobs<span className="flex h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse"></span></Link>
@@ -64,7 +67,6 @@ export default function RootLayout({
               <Link href="/signup" className="px-4 sm:px-6 py-2 sm:py-2.5 text-sm font-black bg-slate-900 text-white rounded-xl shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:bg-slate-800 hover:-translate-y-0.5 transition-all hidden sm:block">
                 Get Access
               </Link>
-              <MobileNav />
             </div>
           </div>
         </nav>
