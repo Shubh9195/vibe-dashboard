@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
+import MobileNav from "@/components/MobileNav";
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -60,9 +61,10 @@ export default function RootLayout({
               <Link href="/login" className="hidden sm:block px-5 py-2.5 text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">
                 Sign In
               </Link>
-              <Link href="/signup" className="px-4 sm:px-6 py-2 sm:py-2.5 text-sm font-black bg-slate-900 text-white rounded-xl shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:bg-slate-800 hover:-translate-y-0.5 transition-all">
+              <Link href="/signup" className="px-4 sm:px-6 py-2 sm:py-2.5 text-sm font-black bg-slate-900 text-white rounded-xl shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:bg-slate-800 hover:-translate-y-0.5 transition-all hidden sm:block">
                 Get Access
               </Link>
+              <MobileNav />
             </div>
           </div>
         </nav>
