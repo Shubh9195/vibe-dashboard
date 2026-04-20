@@ -41,7 +41,7 @@ export default function Signup() {
           <div className="flex items-start gap-2 pt-2">
             <input type="checkbox" required className="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300" />
             <p className="text-xs text-slate-500 font-medium leading-relaxed">
-              I agree to the <Link href="#" className="text-blue-600 hover:underline">Terms of Service</Link> and <Link href="#" className="text-blue-600 hover:underline">Privacy Policy</Link>.
+              I agree to the <Link href="/terms" className="text-blue-600 hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</Link>.
             </p>
           </div>
 

@@ -2,8 +2,20 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, BrainCircuit, Globe2, Award, Users, CheckCircle2, LayoutDashboard, Target, Zap, ShieldCheck } from "lucide-react";
 
 import AIAssistant from "@/components/AIAssistant";
+import { createClient } from "@/lib/supabase/server";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: recruitments } = await supabase.from("recruitments").select("*").eq("is_active", true).order("created_at", { ascending: false });
+
+  const displayRecruitments = recruitments?.length ? recruitments : [
+    { id: '1', title: 'NFSU Non-Teaching Staff Recruitment 2026', posts_count: 51, role_name: 'Section Officer, DSO & Assistant', closing_date: '2026-03-23', apply_link: 'https://nfsunt.samarth.edu.in/index.php/site/login', institute_icon: '🔬', category: 'NFSU' },
+    { id: '2', title: 'Rashtriya Raksha University Non-Teaching', posts_count: 3, role_name: 'Registrar, Finance Officer & Assistant', closing_date: '2026-04-13', apply_link: 'https://rru.ac.in/recruitment/', institute_icon: '🏛️', category: 'Central Univ' },
+    { id: '3', title: 'IGNOU JAT Recruitment Drive NTA 2026', posts_count: 200, role_name: 'Junior Assistant cum Typist (JAT)', closing_date: '2026-05-15', apply_link: 'https://ignou.ac.in/career', institute_icon: '🎓', category: 'Central Univ' },
+    { id: '4', title: 'DTU Group C Non-Teaching', posts_count: 150, role_name: 'Junior Office Assistant & DEO', closing_date: '2026-04-30', apply_link: 'http://www.dtu.ac.in/', institute_icon: '💻', category: 'Central Univ' },
+    { id: '5', title: 'JNU Non-Teaching Staff NTA (Phase 2)', posts_count: 388, role_name: 'Junior Assistant, MTS, Lab Assistant', closing_date: '2026-05-30', apply_link: 'https://jnu.ac.in/career', institute_icon: '🌐', category: 'Central Univ' }
+  ];
+
   return (
     <div className="flex flex-col gap-24 pb-24 overflow-hidden relative">
       {/* Animated Light Background */}
@@ -97,74 +109,29 @@ export default function Home() {
           </div>
 
           <div className="space-y-4 relative z-10">
-            {/* RECRUITMENT ITEM 1 */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between p-5 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-300 group bg-slate-50/50 hover:shadow-md">
-              <div className="flex items-center gap-5 mb-5 md:mb-0">
-                <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center shrink-0 shadow-sm text-2xl group-hover:scale-110 transition-transform">🏛️</div>
-                <div>
-                  <h4 className="font-black font-heading text-slate-900 text-xl group-hover:text-blue-700 transition-colors">IIT Bombay Non-Teaching Staff 2026</h4>
-                  <div className="flex flex-wrap items-center gap-3 text-sm font-bold text-slate-500 mt-2">
-                    <span className="flex items-center gap-1.5 text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100"><Zap className="w-3.5 h-3.5" /> 145 Posts</span>
-                    <span className="flex items-center gap-1.5 text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">Jr. Assistant & Tech</span>
-                    <span className="text-red-500 flex items-center gap-1.5"><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Closes in 12 Days</span>
+            {displayRecruitments.map((job) => (
+              <div key={job.id} className="flex flex-col md:flex-row md:items-center justify-between p-5 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-300 group bg-slate-50/50 hover:shadow-md">
+                <div className="flex items-center gap-5 mb-5 md:mb-0">
+                  <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center shrink-0 shadow-sm text-2xl group-hover:scale-110 transition-transform">{job.institute_icon}</div>
+                  <div>
+                    <h4 className="font-black font-heading text-slate-900 text-xl group-hover:text-blue-700 transition-colors">{job.title}</h4>
+                    <div className="flex flex-wrap items-center gap-3 text-sm font-bold text-slate-500 mt-2">
+                      <span className="flex items-center gap-1.5 text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100"><Zap className="w-3.5 h-3.5" /> {job.posts_count} Posts</span>
+                      <span className="flex items-center gap-1.5 text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">{job.role_name}</span>
+                      <span className="text-red-500 flex items-center gap-1.5"><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Ends {new Date(job.closing_date).toLocaleDateString('en-GB', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-3 w-full md:w-auto">
-                <Link href="/quizzes?filter=IIT" className="flex-1 md:flex-none text-center px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all shadow-sm">
-                  Attempt Mock
-                </Link>
-                <Link href="#" className="flex-1 md:flex-none text-center px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-blue-600 transition-all shadow-md">
-                  Apply Now
-                </Link>
-              </div>
-            </div>
-
-            {/* RECRUITMENT ITEM 2 */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between p-5 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-300 group bg-slate-50/50 hover:shadow-md">
-              <div className="flex items-center gap-5 mb-5 md:mb-0">
-                <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center shrink-0 shadow-sm text-2xl group-hover:scale-110 transition-transform">🔬</div>
-                <div>
-                  <h4 className="font-black font-heading text-slate-900 text-xl group-hover:text-blue-700 transition-colors">NFSU Senior Lab Assistant Drive</h4>
-                  <div className="flex flex-wrap items-center gap-3 text-sm font-bold text-slate-500 mt-2">
-                    <span className="flex items-center gap-1.5 text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100"><Zap className="w-3.5 h-3.5" /> 82 Posts</span>
-                    <span className="flex items-center gap-1.5 text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">Lab Technician</span>
-                    <span className="flex items-center gap-1.5"><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Ends May 22</span>
-                  </div>
+                <div className="flex items-center gap-3 w-full md:w-auto">
+                  <Link href={`/quizzes?filter=${encodeURIComponent(job.category)}`} className="flex-1 md:flex-none text-center px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all shadow-sm">
+                    Attempt Mock
+                  </Link>
+                  <a href={job.apply_link} target="_blank" rel="noopener noreferrer" className="flex-1 md:flex-none text-center px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-blue-600 transition-all shadow-md">
+                    Apply Now
+                  </a>
                 </div>
               </div>
-              <div className="flex items-center gap-3 w-full md:w-auto">
-                <Link href="/quizzes?filter=NFSU" className="flex-1 md:flex-none text-center px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all shadow-sm">
-                  Attempt Mock
-                </Link>
-                <Link href="#" className="flex-1 md:flex-none text-center px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-blue-600 transition-all shadow-md">
-                  Apply Now
-                </Link>
-              </div>
-            </div>
-            
-            {/* RECRUITMENT ITEM 3 */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between p-5 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-300 group bg-slate-50/50 hover:shadow-md">
-              <div className="flex items-center gap-5 mb-5 md:mb-0">
-                <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center shrink-0 shadow-sm text-2xl group-hover:scale-110 transition-transform">🎓</div>
-                <div>
-                  <h4 className="font-black font-heading text-slate-900 text-xl group-hover:text-blue-700 transition-colors">NTA Central Universities (CURE) Phase 2</h4>
-                  <div className="flex flex-wrap items-center gap-3 text-sm font-bold text-slate-500 mt-2">
-                    <span className="flex items-center gap-1.5 text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100"><Zap className="w-3.5 h-3.5" /> 1,200+ Posts</span>
-                    <span className="flex items-center gap-1.5 text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">All India Joint Exam</span>
-                    <span className="flex items-center gap-1.5"><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Ends May 30</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 w-full md:w-auto">
-                <Link href="/quizzes?filter=Central Univ" className="flex-1 md:flex-none text-center px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all shadow-sm">
-                  Attempt Mock
-                </Link>
-                <Link href="#" className="flex-1 md:flex-none text-center px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-blue-600 transition-all shadow-md">
-                  Apply Now
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

@@ -20,7 +20,7 @@ export default function Login() {
           <div>
             <div className="flex justify-between items-center mb-1">
               <label className="block text-sm font-bold text-slate-300">Password</label>
-              <Link href="#" className="text-xs font-bold text-blue-400 hover:underline">Forgot password?</Link>
+              <Link href="/forgot-password" className="text-xs font-bold text-blue-400 hover:underline">Forgot password?</Link>
             </div>
             <input name="password" type="password" required className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white focus:ring-2 focus:ring-blue-600 outline-none transition font-medium" placeholder="••••••••" />
           </div>
