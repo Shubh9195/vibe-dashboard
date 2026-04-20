@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // Protected routes mapping
-  const protectPaths = ["/dashboard", "/quiz", "/profile", "/notes"];
+  const protectPaths = ["/dashboard", "/profile"];
   const isProtected = protectPaths.some((p) =>
     request.nextUrl.pathname.startsWith(p)
   );
