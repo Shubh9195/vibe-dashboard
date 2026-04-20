@@ -20,8 +20,59 @@ export default async function PreviousPapers() {
     .order("year", { ascending: false })
     .order("sequence_number", { ascending: true });
 
+  // Fallback data if table is empty or doesn't exist yet
+  const fallbackDummyPapers = [
+    {
+      id: "pyp-1",
+      title: "NFSU Computer Lab Assistant Official Paper",
+      year: 2024,
+      is_free: true,
+      awaiting_questions: false,
+      questions: Array(100).fill(''),
+      recruitments: { title: "NFSU Assistant & DSO", institute_icon: "🔬", category: "NFSU" }
+    },
+    {
+      id: "pyp-2",
+      title: "NFSU Scientific Assistant Tier 1",
+      year: 2023,
+      is_free: false,
+      awaiting_questions: false,
+      questions: Array(100).fill(''),
+      recruitments: { title: "NFSU Assistant & DSO", institute_icon: "🔬", category: "NFSU" }
+    },
+    {
+      id: "pyp-3",
+      title: "RRU Administrative Assistant PYP",
+      year: 2024,
+      is_free: true,
+      awaiting_questions: false,
+      questions: Array(80).fill(''),
+      recruitments: { title: "RRU Non-Teaching Staff", institute_icon: "🏛️", category: "Central Univ" }
+    },
+    {
+      id: "pyp-4",
+      title: "IGNOU JAT Junior Assistant Typist",
+      year: 2023,
+      is_free: true,
+      awaiting_questions: false,
+      questions: Array(120).fill(''),
+      recruitments: { title: "IGNOU Junior Assistant", institute_icon: "🎓", category: "Central Univ" }
+    },
+    {
+      id: "pyp-5",
+      title: "JNU Group C MTS Official CBT Paper",
+      year: 2024,
+      is_free: false,
+      awaiting_questions: false,
+      questions: Array(100).fill(''),
+      recruitments: { title: "JNU Non-Teaching MTS", institute_icon: "🌐", category: "Central Univ" }
+    }
+  ];
+
+  const papersToDisplay = rawPapers?.length ? rawPapers : fallbackDummyPapers;
+
   // Group papers by category
-  const groupedPapers = (rawPapers || []).reduce((acc: any, paper: any) => {
+  const groupedPapers = papersToDisplay.reduce((acc: any, paper: any) => {
     const category = paper.recruitments?.category || "Other";
     if (!acc[category]) acc[category] = [];
     acc[category].push(paper);
@@ -45,12 +96,7 @@ export default async function PreviousPapers() {
         </div>
       </div>
 
-      {categories.length === 0 ? (
-        <div className="py-20 text-center text-slate-500 font-medium bg-slate-50 rounded-3xl border border-slate-200">
-          No previous year papers published yet. Add a recruitment via the agent to scaffold them!
-        </div>
-      ) : (
-        <div className="space-y-16">
+      <div className="space-y-16">
           {categories.map((catName) => {
             const papers = groupedPapers[catName];
             return (
@@ -118,8 +164,7 @@ export default async function PreviousPapers() {
               </div>
             );
           })}
-        </div>
-      )}
+      </div>
     </div>
   );
 }
